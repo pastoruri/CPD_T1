@@ -26,6 +26,11 @@ void fillVector(int** vec, int N){
         vec[i][0] = rand() % 10 + 1;
     }
 }
+void transpose(int** vec, int* vec_t, int N) {
+    for (int i = 0; i < N; ++i) {
+        vec_t[i] = vec[i][0];
+    }
+}
 void printMatrix(int** mat, int N){
     std::cout << "Matriz: " << std::endl;
     for(int i = 0; i < N; ++i){
