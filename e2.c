@@ -65,12 +65,12 @@ void *multiply(void *args) {
     columns = my_data->columns;
 
     for (i = row_0; i < row_1; i++) {
-        for (j = 0; j < columns; j++) {
+        //for (j = 0; j < columns; j++) {
             result[i] = 0;
             for (k = 0; k < columns; k++) {
                 result[i] += m1[i][k]*vector[k];
             }
-        }
+        //}
     }
 
 }
