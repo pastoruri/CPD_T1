@@ -1,6 +1,6 @@
 #include <iostream>
 #include <time.h>
-#include "MatrixMultiplicationBlockTilling.h"
+#include "e2MatrixBlockTilling.h"
 using namespace std;
 
 #define num_threads 4

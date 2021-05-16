@@ -41,14 +41,14 @@ public:
 	}
 
 	void start() {
-		scoped_lock<mutex> lock(_mutex);
+		std::scoped_lock<std::mutex> lock(_mutex);
 		if (is_running) {return;}
 		is_running = true;
 		start_func();
 	}
 
 	void stop() {
-		scoped_lock<mutex> lock(_mutex);
+		std::scoped_lock<std::mutex> lock(_mutex);
 		if (is_running == false) {return;}
 		is_running = false;
 		thr.join();

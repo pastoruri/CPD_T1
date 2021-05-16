@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iomanip>
 #include <immintrin.h>
+#include <chrono>
 using namespace std;
 
 #define dim 8
@@ -43,6 +44,7 @@ void printVector(float * vec){
 }
 
 void matVecMult(float **mat, float *vec){
+
   for (int i = 0; i < dim; ++i) {
     __m128 temp = _mm_setzero_ps();
     for (int col = 0; col < dim; col += 4) {
@@ -62,7 +64,14 @@ int main(){
 	fillMatrix(matrix);
 	fillVector(vec);
 
+    auto start = chrono::steady_clock::now();
 	matVecMult(matrix, vec);
+	auto end = chrono::steady_clock::now();
+    cout << "Tiempo en microseconds: "
+        << chrono::duration_cast<chrono::nanoseconds>(end - start).count()
+        << " μs\n";
+
+
 	printMatrix(matrix);
 	printVector(vec);
 	printVector(result);

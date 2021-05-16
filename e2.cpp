@@ -1,8 +1,11 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include <chrono>
 
 #define num_threads 4
+using namespace std;
 
 int **m1;
 int *vector;
@@ -57,6 +60,8 @@ void printvector(int *v, int size) {
 };
 
 void *multiply(void *args) {
+    auto start = chrono::steady_clock::now();
+
     int i, j, k, row_0, row_1, columns;
     struct data *my_data;
     my_data = (struct data*) args;
@@ -72,7 +77,10 @@ void *multiply(void *args) {
             }
         //}
     }
-
+    auto end = chrono::steady_clock::now();
+    cout << "Tiempo en microseconds: "
+        << chrono::duration_cast<chrono::microseconds>(end - start).count()
+        << " μs\n";
 }
 
 int main() {
@@ -87,6 +95,8 @@ int main() {
     allocmemory(rows, columns);
     fillmatrix(rows, columns);
 
+    
+    
     int i, temp, cont;
     temp = 0;
     cont = rows/num_threads;
@@ -124,6 +134,8 @@ int main() {
 			pthread_join(thr[i], NULL);
 		}
 
+    
+    
     /*printf("Matrix:\n");
     printmatrix(m1, rows, columns);
     printf("Vector:\n");

@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iomanip>
 #include <chrono>
+
 using namespace std;
 
 #define dim 20

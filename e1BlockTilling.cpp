@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iomanip>
+#include <chrono>
 using namespace std;
 
-#define dim 4
+#define dim 20
 
 int ** matrix = new int*[dim];
 int * result = new int[dim];
@@ -55,9 +56,15 @@ int main(){
 	fillMatrix(matrix);
 	fillVector(vec);
 
-	matVecMult(matrix, vec);
-	printMatrix(matrix);
-	printVector(vec);
-	printVector(result);
+	auto start = chrono::steady_clock::now();
+    matVecMult(matrix, vec);
+    auto end = chrono::steady_clock::now();
+
+    cout << "Tiempo en microseconds: "
+        << chrono::duration_cast<chrono::nanoseconds>(end - start).count()
+        << " μs\n";
+	//printMatrix(matrix);
+	//printVector(vec);
+	//printVector(result);
 	return 0;
 }
